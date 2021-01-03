@@ -11,11 +11,32 @@ class Search extends Component {
       ? alert("search cannot be empty")
       : this.props.handleSearch(query);
   };
+
+  categories = () => {
+    return this.props.categories.map((category, index) => (
+      <option value={category} key={index} name={category}>
+        {category}
+      </option>
+    ));
+  };
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="search a name" name="name" />
-        <button type="submit">search</button>
+        <div className="query">
+          <input
+            type="text"
+            placeholder="search a name"
+            name="name"
+            category="people"
+          />
+          <button type="submit">search</button>
+        </div>
+
+        <div className="category">
+          <select name="category" id="search-category">
+            {this.categories()}
+          </select>
+        </div>
       </form>
     );
   }

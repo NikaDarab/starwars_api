@@ -10,13 +10,21 @@ class App extends Component {
     this.state = {
       query: "",
       names: [],
+      categories: [
+        "planets",
+        "starships",
+        "vehicles",
+        "people",
+        "films",
+        "species",
+      ],
     };
   }
-  handleSearch = (query) => {
+  handleSearch = (category, query) => {
     this.setState({
       query: query,
     });
-    return fetch(`${config.API_ENDPOINT}?search=${query}`)
+    return fetch(`${config.API_ENDPOINT}/${category}?search=${query}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("something went wrong!try again later.");
@@ -38,7 +46,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Search handleSearch={this.handleSearch} name={this.state.query} />
+        <Search
+          handleSearch={this.handleSearch}
+          name={this.state.query}
+          categories={this.state.categories}
+        />
         <Display name={this.state.query} names={this.state.names} />
       </div>
     );
