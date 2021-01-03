@@ -17,7 +17,12 @@ class App extends Component {
       query: query,
     });
     return fetch(`${config.API_ENDPOINT}?search=${query}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("something went wrong!try again later.");
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
         const results = data.results.map((result) => (
@@ -26,7 +31,8 @@ class App extends Component {
         this.setState({
           names: results,
         });
-      });
+      })
+      .catch((e) => e.message);
   };
 
   render() {
