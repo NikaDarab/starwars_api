@@ -8,27 +8,30 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      result: "",
+      query: "",
+      names: [],
     };
   }
   handleSearch = (query) => {
     this.setState({
-      name: query,
+      query: query,
     });
     return fetch(`${config.API_ENDPOINT}?search=${query}`)
       .then((res) => res.json())
       .then((data) => {
+        const results = data.results.map((result) => result.name);
+        console.log(results);
         this.setState({
-          result: data.results[0].name,
+          names: results,
         });
       });
   };
+
   render() {
     return (
       <div className="App">
-        <Search handleSearch={this.handleSearch} name={this.state.name} />
-        <Display name={this.state.name} result={this.state.result} />
+        <Search handleSearch={this.handleSearch} name={this.state.query} />
+        <Display name={this.state.query} names={this.state.names} />
       </div>
     );
   }

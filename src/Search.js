@@ -6,7 +6,6 @@ class Search extends Component {
     e.preventDefault();
     const query = e.target.name.value;
     e.target.name.value = "";
-    console.log(`props name is ${this.props.name}`);
     console.log(`name is ${query}`);
     query.length === 0
       ? alert("search cannot be empty")

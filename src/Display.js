@@ -1,14 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Display extends Component {
-  render() {
-    return (
-      <div>
-        This is the results of the search!
-        <p>{this.props.result}</p>
-      </div>
-    );
-  }
-}
+const Display = (props) => {
+  return <ul>{props.names}</ul>;
+};
 
 export default Display;
