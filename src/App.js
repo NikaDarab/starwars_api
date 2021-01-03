@@ -19,8 +19,10 @@ class App extends Component {
     return fetch(`${config.API_ENDPOINT}?search=${query}`)
       .then((res) => res.json())
       .then((data) => {
-        const results = data.results.map((result) => result.name);
-        console.log(results);
+        console.log(data);
+        const results = data.results.map((result) => (
+          <ul key={result.created}>{result.name}</ul>
+        ));
         this.setState({
           names: results,
         });

@@ -1,7 +1,6 @@
 import React from "react";
 
 const Display = (props) => {
-  return <ul>{props.names}</ul>;
+  return <>{props.names}</>;
 };
-
 export default Display;
