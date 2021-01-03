@@ -9,6 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       name: "",
+      result: "",
     };
   }
   handleSearch = (query) => {
@@ -17,13 +18,17 @@ class App extends Component {
     });
     return fetch(`${config.API_ENDPOINT}?search=${query}`)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        this.setState({
+          result: data.results[0].name,
+        });
+      });
   };
   render() {
     return (
       <div className="App">
         <Search handleSearch={this.handleSearch} name={this.state.name} />
-        <Display name={this.state.name} />
+        <Display name={this.state.name} result={this.state.result} />
       </div>
     );
   }

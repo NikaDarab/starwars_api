@@ -5,7 +5,7 @@ class Display extends Component {
     return (
       <div>
         This is the results of the search!
-        <p> {this.props.name}</p>
+        <p>{this.props.result}</p>
       </div>
     );
   }
